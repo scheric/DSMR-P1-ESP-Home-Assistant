@@ -1,7 +1,7 @@
 {
-    "domain": "xxxx",
-    "name": "xxxx",
-    "documentation": "https://www.home-assistant.io/integrations/xxxx",
+    "domain": "dsmr-esp",
+    "name": "dsmr meter",
+    "documentation": "https://www.home-assistant.io/integrations/dsmr",
     "requirements": [],
     "dependencies": [
         "mqtt"
