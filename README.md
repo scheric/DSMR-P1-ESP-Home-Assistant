@@ -33,7 +33,7 @@ topics
 
 ```yaml
 sensor:
-  - platform: dsmr_esp
+  - platform: dsmr-esp
     name: dsmr meter
 ```
 4. reboot Home Assistant
