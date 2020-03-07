@@ -1,0 +1,12 @@
+{
+    "domain": "xxxx",
+    "name": "xxxx",
+    "documentation": "https://www.home-assistant.io/integrations/xxxx",
+    "requirements": [],
+    "dependencies": [
+        "mqtt"
+    ],
+    "codeowners": [
+        "@scheric"
+    ]
+}
