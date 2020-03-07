@@ -2,7 +2,7 @@
 Custom component for receiving MQTT values from dsmr-esp. I made this for clearing up the configuration.yaml files. 
  
 
-# This project is in pre alpha state
+# This project is in alpha state
 
 ### my wishlist
 
@@ -15,7 +15,7 @@ Custom component for receiving MQTT values from dsmr-esp. I made this for cleari
 topics
 - [x] consumption_low_tarif 
 - [ ] consumption_high_tarif 
-- [ ] actual_consumption 
+- [x] actual_consumption 
 - [ ] instant_power_usage 
 - [ ] instant_power_current 
 - [ ] gas_meter_m3 
@@ -28,7 +28,7 @@ topics
 ### How to use this
 
 1. Create a `custom_components` folder located inside the Home Assistant `config` folder.
-2. Copy the folder `dsmr_esp` into the `custom_components` folder. 
+2. Copy the folder `dsmr-esp` into the `custom_components` folder. 
 3. Add the yaml code below to your `configuration.yaml`
 
 ```yaml
