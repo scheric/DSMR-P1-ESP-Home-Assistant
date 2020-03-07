@@ -13,9 +13,9 @@ from homeassistant.const import (
 
 import json
 
-DOMAIN = "xxxx"
+DOMAIN = "dsmr-esp"
 
-from .constants import [CONSTANTS IMPORT]
+from .constants import CONSTANTS_SENSORS_SENSORS 
 
 CONF_BASE = "base_topic"
 
@@ -31,7 +31,7 @@ _LOGGER = logging.getLogger(__name__)
         #_LOGGER.error(f"sensor: {sensor}")
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
-    """Set up XXX sensors."""
+    """Set up dsmr-esp sensors."""
     
     sensors = []
      
@@ -45,7 +45,7 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
 
 
 class EMS_ESPSensor(Entity):
-    """Representation of a XXX sensor that is updated via MQTT."""
+    """Representation of a dsmr-esp sensor that is updated via MQTT."""
 
     def __init__(self, config, Name, Unit, Icon, Value, Topic):
         """Initialize the sensor."""
