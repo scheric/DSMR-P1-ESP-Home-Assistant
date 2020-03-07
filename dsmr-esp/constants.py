@@ -13,5 +13,12 @@ CONSTANTS_SENSORS_SENSORS = {
         "icon": "flash",
         "unit": "kwh",
     },
+    "actual consumption": {
+        "value": "actual_consumption",
+        "topic": MQTT_TOPICS[0],
+        "name": "average power consumption",
+        "icon": "power-socket-de",
+        "unit": "W",
+    },
 }
 
