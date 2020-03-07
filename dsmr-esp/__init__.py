@@ -1,1 +1,1 @@
-"""The [dsmr-esp] component."""
+"""The dsmr-esp component."""
