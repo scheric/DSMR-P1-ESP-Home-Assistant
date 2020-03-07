@@ -1,4 +1,4 @@
-"""Support for ems-esp through MQTT."""
+"""Support for dsmr-esp through MQTT."""
 from homeassistant.components import mqtt
 from homeassistant.core import callback
 from homeassistant.helpers.entity import Entity
