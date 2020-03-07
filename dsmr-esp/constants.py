@@ -11,7 +11,7 @@ CONSTANTS_SENSORS_SENSORS = {
         "topic": MQTT_TOPICS[0],
         "name": "low tarif consumprion",
         "icon": "flash",
-        "unit": kwh,
+        "unit": "kwh",
     },
 }
 

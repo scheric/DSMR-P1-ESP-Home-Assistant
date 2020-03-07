@@ -17,14 +17,9 @@ DOMAIN = "dsmr-esp"
 
 from .constants import CONSTANTS_SENSORS_SENSORS 
 
-CONF_BASE = "base_topic"
-
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default="EMS_ESP"): cv.string,
-    vol.Optional(CONF_THERMOSTAT, default=False): cv.boolean,
-    vol.Optional(CONF_SENSORS, default=0): cv.positive_int,
-    vol.Optional(CONF_POWER, default=0): vol.Coerce(float),
 })
 
 _LOGGER = logging.getLogger(__name__)
@@ -36,9 +31,9 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
     sensors = []
      
     #add thermostat sensors DONE
-    if config[CONF_THERMOSTAT]:
-        for sensor in CONSTANTS_SENSORS_THERMOSTAT:
-            sensors.append(EMS_ESPSensor(config, CONSTANTS_SENSORS_THERMOSTAT[sensor].get("name"), CONSTANTS_SENSORS_THERMOSTAT[sensor].get("unit") , CONSTANTS_SENSORS_THERMOSTAT[sensor].get("icon"), CONSTANTS_SENSORS_THERMOSTAT[sensor].get("value"), CONSTANTS_SENSORS_THERMOSTAT[sensor].get("topic")))
+
+    for sensor in CONSTANTS_SENSORS_SENSORS:
+        sensors.append(EMS_ESPSensor(config, CONSTANTS_SENSORS_SENSORS[sensor].get("name"), CONSTANTS_SENSORS_SENSORS[sensor].get("unit") , CONSTANTS_SENSORS_SENSORS[sensor].get("icon"), CONSTANTS_SENSORS_SENSORS[sensor].get("value"), CONSTANTS_SENSORS_SENSORS[sensor].get("topic")))
 
     
     async_add_entities(sensors)
@@ -50,16 +45,16 @@ class EMS_ESPSensor(Entity):
     def __init__(self, config, Name, Unit, Icon, Value, Topic):
         """Initialize the sensor."""
 
-        self._base  = config[CONF_BASE]
-        self._Name = config[CONF_NAME] + " "
+        self._Name = "(" + config[CONF_NAME]+ ")" + " "
         
         #self._topic = self._base + "/ems-esp/boiler_data"
         
         self._name = Name
         self._unit_of_measurement = Unit      
-        self._icon = Icon      
+        self._icon = "mdi:" + Icon      
         self._value = Value
-        self._topic = self._base + Topic 
+        self._topic = Topic
+        self._full_topic = Topic + Value
          
         self._in = None
         self._out = None
@@ -70,11 +65,11 @@ class EMS_ESPSensor(Entity):
         @callback
         def message_received(message):
             """Handle new MQTT messages."""
-            self._in = json.loads(message.payload)[self._value]
+            self._in = message.payload
 
             self.async_schedule_update_ha_state()
 
-        await mqtt.async_subscribe(self.hass, self._topic, message_received, 1)
+        await mqtt.async_subscribe(self.hass, self._full_topic, message_received, 1)
 
     @property
     def name(self):
@@ -96,6 +91,15 @@ class EMS_ESPSensor(Entity):
         
         
         return self._out
+        
+    @property
+    def device_state_attributes(self):
+        """Return the state attributes."""
+        return {
+                "topic": self._topic,
+                "value: ": self._value,
+                "full topic": self._full_topic
+                } 
 
     @property
     def unit_of_measurement(self):
