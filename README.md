@@ -2,7 +2,7 @@
 Custom component for receiving MQTT values from xxx. I made this for clearing up the configuration.yaml files. 
  
 
-# This project is in beta state
+# This project is in pre alpha state
 
 ### my wishlist
 
