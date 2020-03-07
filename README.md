@@ -1,5 +1,5 @@
 # DSMR data aver mqtt to Home Assistant
-Custom component for receiving MQTT values from DSMR_esp. I made this for clearing up the configuration.yaml files. 
+Custom component for receiving MQTT values from dsmr-esp. I made this for clearing up the configuration.yaml files. 
  
 
 # This project is in pre alpha state
