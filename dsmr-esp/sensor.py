@@ -15,7 +15,7 @@ import json
 
 DOMAIN = "dsmr-esp"
 
-from .constants import CONSTANTS_SENSORS_SENSORS 
+from .constants import CONSTANTS_SENSORS_METER_READINGS, CONSTANTS_SENSORS_AVERAGE_READINGS, CONSTANTS_SENSORS_INSTANTANEOUS_READINGS
 
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
@@ -32,8 +32,14 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
      
     #add thermostat sensors DONE
 
-    for sensor in CONSTANTS_SENSORS_SENSORS:
-        sensors.append(EMS_ESPSensor(config, CONSTANTS_SENSORS_SENSORS[sensor].get("name"), CONSTANTS_SENSORS_SENSORS[sensor].get("unit") , CONSTANTS_SENSORS_SENSORS[sensor].get("icon"), CONSTANTS_SENSORS_SENSORS[sensor].get("value"), CONSTANTS_SENSORS_SENSORS[sensor].get("topic")))
+    for sensor in CONSTANTS_SENSORS_METER_READINGS:
+        sensors.append(EMS_ESPSensor(config, CONSTANTS_SENSORS_METER_READINGS[sensor].get("name"), CONSTANTS_SENSORS_METER_READINGS[sensor].get("unit") , CONSTANTS_SENSORS_METER_READINGS[sensor].get("icon"), CONSTANTS_SENSORS_METER_READINGS[sensor].get("value"), CONSTANTS_SENSORS_METER_READINGS[sensor].get("topic")))
+
+    for sensor in CONSTANTS_SENSORS_AVERAGE_READINGS:
+        sensors.append(EMS_ESPSensor(config, CONSTANTS_SENSORS_AVERAGE_READINGS[sensor].get("name"), CONSTANTS_SENSORS_AVERAGE_READINGS[sensor].get("unit") , CONSTANTS_SENSORS_AVERAGE_READINGS[sensor].get("icon"), CONSTANTS_SENSORS_AVERAGE_READINGS[sensor].get("value"), CONSTANTS_SENSORS_AVERAGE_READINGS[sensor].get("topic")))
+
+    for sensor in CONSTANTS_SENSORS_INSTANTANEOUS_READINGS:
+        sensors.append(EMS_ESPSensor(config, CONSTANTS_SENSORS_INSTANTANEOUS_READINGS[sensor].get("name"), CONSTANTS_SENSORS_INSTANTANEOUS_READINGS[sensor].get("unit") , CONSTANTS_SENSORS_INSTANTANEOUS_READINGS[sensor].get("icon"), CONSTANTS_SENSORS_INSTANTANEOUS_READINGS[sensor].get("value"), CONSTANTS_SENSORS_INSTANTANEOUS_READINGS[sensor].get("topic")))
 
     
     async_add_entities(sensors)
@@ -107,8 +113,21 @@ class EMS_ESPSensor(Entity):
                 self._out = round((self._in/1000),2)
             except:
                 pass
-                    
+       
+       
         if self._value == "gas_meter_m3":
+            try:
+                self._out = round((self._in/1000),2)
+            except:
+                pass
+                                     
+        if self._value == "instant_voltage":
+            try:
+                self._out = round((self._in/1000),2)
+            except:
+                pass
+                                         
+        if self._value == "instant_current":
             try:
                 self._out = round((self._in/1000),2)
             except:
