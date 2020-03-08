@@ -23,7 +23,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 })
 
 _LOGGER = logging.getLogger(__name__)
-        #_LOGGER.error(f"sensor: {sensor}")
+        #_LOGGER.error(f"sensor: {SENSOR_VALUE}")
 
 async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up dsmr-esp sensors."""
@@ -65,7 +65,7 @@ class EMS_ESPSensor(Entity):
         @callback
         def message_received(message):
             """Handle new MQTT messages."""
-            self._in = message.payload
+            self._in = int(message.payload)
 
             self.async_schedule_update_ha_state()
 
@@ -80,16 +80,42 @@ class EMS_ESPSensor(Entity):
     def state(self):
         """Return the current state of the entity."""
         
-        self._out = self._in
+        #give state to frontend
+        self._out = self._in 
         
-        #calculation example
-        if self._name == "current burner power":
+        #give state to frontend with calculation 
+        if self._value == "consumption_low_tarif":
             try:
-                self._out = round(((self._boiler_power/100) * self._in),1)
-            except TypeError:
+                self._out = round((self._in / 1000),2)
+            except:
                 pass
-        
-        
+                
+        if self._value == "consumption_high_tarif":
+            try:
+                self._out = round((self._in/1000),2)
+            except:
+                pass
+                
+        if self._value == "production_low_tarif":
+            try:
+                self._out = round((self._in/1000),2)
+            except:
+                pass
+                
+        if self._value == "production_high_tarif":
+            try:
+                self._out = round((self._in/1000),2)
+            except:
+                pass
+                    
+        if self._value == "gas_meter_m3":
+            try:
+                self._out = round((self._in/1000),2)
+            except:
+                pass
+                
+                
+      
         return self._out
         
     @property
@@ -98,7 +124,9 @@ class EMS_ESPSensor(Entity):
         return {
                 "topic": self._topic,
                 "value: ": self._value,
-                "full topic": self._full_topic
+                "full topic": self._full_topic,
+                "input": self._in,
+                "output": self._out
                 } 
 
     @property
