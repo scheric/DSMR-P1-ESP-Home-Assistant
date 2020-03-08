@@ -14,11 +14,14 @@ Custom component for receiving MQTT values from dsmr-esp. I made this for cleari
 
 topics
 - [x] consumption_low_tarif 
-- [ ] consumption_high_tarif 
+- [x] consumption_high_tarif 
+- [x] production_low_tarif 
+- [x] production_high_tarif 
 - [x] actual_consumption 
+- [ ] actual_production
 - [ ] instant_power_usage 
 - [ ] instant_power_current 
-- [ ] gas_meter_m3 
+- [x] gas_meter_m3 
 - [ ] actual_tarif_group 
 - [ ] short_power_outages 
 - [ ] long_power_outages 
